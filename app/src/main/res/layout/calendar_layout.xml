@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/calendar"
+    android:id="@+id/calendar_lay_view"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/but_previous_mounth"
-        android:background="@drawable/ic_launcher_foreground"
+        android:background="@color/cardview_dark_background"
         android:layout_margin="10dp"/>
 
     <TextView
@@ -25,6 +25,7 @@
         android:gravity="center"
         android:layout_marginTop="4dp"
         android:text="Current Date"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18sp"
         android:layout_weight="3"/>
@@ -33,7 +34,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/but_next_mounth"
-            android:background="@drawable/ic_launcher_foreground"
+            android:background="@color/cardview_dark_background"
             android:layout_margin="10dp"/>
     </LinearLayout>
 
@@ -97,5 +98,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/gridView"
+        android:background="@color/purple_700"
         android:numColumns="7"/>
 </LinearLayout>
