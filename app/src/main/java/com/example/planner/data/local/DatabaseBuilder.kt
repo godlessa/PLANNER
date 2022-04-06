@@ -1,7 +1,7 @@
 package com.example.planner.data.local
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.example.planner.data.local.database.AppDatabase
 import com.example.planner.data.local.database.AppDatabase.Companion.DATABASE_NAME
 

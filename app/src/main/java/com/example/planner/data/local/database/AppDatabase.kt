@@ -1,7 +1,7 @@
 package com.example.planner.data.local.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.example.planner.data.local.dao.EventsDao
 import com.example.planner.data.local.database.AppDatabase.Companion.DATABASE_VERSION
 import com.example.planner.data.local.entities.EventEntity

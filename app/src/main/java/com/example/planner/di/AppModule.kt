@@ -1,7 +1,7 @@
 package com.example.planner.di
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.example.planner.data.local.database.AppDatabase
 import com.example.planner.data.repository.MainRepository
 import com.example.planner.domain.repository.IMainRepository
