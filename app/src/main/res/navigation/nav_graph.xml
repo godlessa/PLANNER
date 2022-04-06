@@ -9,6 +9,20 @@
         android:name="com.example.planner.presentation.main.MainFragment"
         android:label="main_gragment"
         tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
+        <argument
+            android:name="currentEventByIDdb"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.example.planner.presentation.showEvent.EventDetailsFragment"
+        android:label="event_gragment"
+        tools:layout="@layout/event_details_fragment">
     </fragment>
 
 </navigation>
