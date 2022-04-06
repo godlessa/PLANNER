@@ -1,4 +1,4 @@
-package com.example.planner
+package com.example.planner.data.local.entities
 
 data class Event(
     var event: String,

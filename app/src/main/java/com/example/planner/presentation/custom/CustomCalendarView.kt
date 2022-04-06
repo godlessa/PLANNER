@@ -1,11 +1,10 @@
-package com.example.planner
+package com.example.planner.presentation.custom
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.CalendarView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatViewInflater
+import com.example.planner.data.local.entities.Event
 import com.example.planner.databinding.CalendarLayoutBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,20 +17,15 @@ open class CustomCalendarView @JvmOverloads constructor
 ) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
     private lateinit var binding: CalendarLayoutBinding
     private var planner: Calendar = Calendar.getInstance(Locale.ENGLISH)
-    private var dateFormat: SimpleDateFormat
+    private var dateFormat: SimpleDateFormat = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
 
     init{
-        dateFormat = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
-        binding = CalendarLayoutBinding.bind(binding.root)
+        binding = CalendarLayoutBinding.inflate(LayoutInflater.from(context),this,true)
         setupViews()
         setUpCalendar()
     }
     val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH);
     val yearFormat: SimpleDateFormat = SimpleDateFormat("yyyy", Locale.ENGLISH);
-
-
-
-
     var dates: List<Date> = mutableListOf()
     var eventsList: List<Event> = mutableListOf()
 
