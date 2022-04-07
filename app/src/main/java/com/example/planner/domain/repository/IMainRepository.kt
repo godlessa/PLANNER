@@ -11,6 +11,6 @@ interface IMainRepository {
 
     suspend fun insertEventsList(eventsList: List<EventEntity>)
 
-    suspend fun insertEvent(event: EventEntity)
+    fun insertEvent(event: EventEntity)
 
 }

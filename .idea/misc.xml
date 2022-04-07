@@ -9,10 +9,13 @@
         <entry key="..\:/Users/Irina/Documents/PLANNER/app/src/main/res/layout/event_details_fragment.xml" value="0.30625" />
         <entry key="..\:/Users/Irina/Documents/PLANNER/app/src/main/res/layout/main_fragment.xml" value="0.1610738255033557" />
         <entry key="..\:/Users/Irina/Documents/PLANNER/app/src/main/res/layout/nav_graph.xml" value="0.30625" />
+        <entry key="app/src/main/res/drawable/blue_rectangle.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/left_triangle_back_press.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1431159420289855" />
-        <entry key="app/src/main/res/layout/calendar_layout.xml" value="0.2904349727907043" />
+        <entry key="app/src/main/res/layout/calendar_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/event_details_fragment.xml" value="0.15677083333333333" />
-        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/layout/item_planner.xml" value="0.5087674729367521" />
+        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.3172826131184896" />
       </map>
     </option>
   </component>

@@ -19,7 +19,6 @@ class MainFragment : Fragment() {
 
     private var currentMonth: String = ""
     private var currentYear: String = ""
-    private var events: List<EventEntity> ?= listOf()
 
     companion object {
         fun newInstance() = MainFragment()
@@ -33,10 +32,10 @@ class MainFragment : Fragment() {
         binding = MainFragmentBinding.inflate(inflater)
         setupViews()
 
-        /*lifecycleScope.launchWhenStarted {
-            if(currentMonth != "" && currentYear != "")
-                events = viewModel.getEventsCurrentMonthFomDB(currentMonth, currentYear)
-        }*/
+        //lifecycleScope.launchWhenStarted {
+        //    if(currentMonth != "" && currentYear != "")
+        //        events = viewModel.getEventsCurrentMonthFomDB(currentMonth, currentYear)
+        //}
 
         return binding.root
     }
@@ -45,7 +44,6 @@ class MainFragment : Fragment() {
         binding.calendarView.visibility = View.VISIBLE
         currentMonth = binding.calendarView.getMonth()
         currentYear = binding.calendarView.getYear()
-
     }
 
 }

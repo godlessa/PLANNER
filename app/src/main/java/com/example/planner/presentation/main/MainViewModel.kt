@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.planner.data.local.entities.EventEntity
 import com.example.planner.data.repository.MainRepository
+import com.example.planner.domain.usecase.AddEventByDBUseCase
 import com.example.planner.domain.usecase.GetEventsToMonthByDBUseCase
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,10 +17,10 @@ import java.lang.Exception
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getEventsToMonthByDBUseCase: GetEventsToMonthByDBUseCase
+    private val getEventsToMonthByDBUseCase: GetEventsToMonthByDBUseCase,
+    private val addEventByDBUseCase: AddEventByDBUseCase
 ) : ViewModel(
 ) {
-    var events = MutableStateFlow(listOf<EventEntity>())
 
 
     /*private fun getEventsFomDB(){
@@ -35,4 +36,12 @@ class MainViewModel @Inject constructor(
     fun getEventsCurrentMonthFomDB(month: String, year: String): Flow<List<EventEntity>> {
         return getEventsCurrentMonthFomDB(month, year)
     }
+
+    fun addEventInDB(eventNew: EventEntity){
+        addEventByDBUseCase(eventNew)
+    }
+
+
+
+
 }
