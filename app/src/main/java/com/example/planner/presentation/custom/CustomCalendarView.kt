@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -12,6 +13,7 @@ import com.example.planner.R
 import com.example.planner.data.local.entities.EventEntity
 import com.example.planner.databinding.CalendarLayoutBinding
 import com.example.planner.databinding.EventDetailsFragmentBinding
+import com.example.planner.presentation.adapter.PlannerAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,21 +29,25 @@ open class CustomCalendarView @JvmOverloads constructor
         const val MAX_CALENDAT_DAYS = 42
     }
 
+    val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH)
+    val yearFormat: SimpleDateFormat = SimpleDateFormat("yyyy", Locale.ENGLISH)
+    var dates: MutableList<Date> = mutableListOf()
+    var eventsList: List<EventEntity> = mutableListOf()
+
+    lateinit var alertDialog:AlertDialog
+
     private var binding: CalendarLayoutBinding =
         CalendarLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     private var planner: Calendar = Calendar.getInstance(Locale.ENGLISH)
     private var dateFormat: SimpleDateFormat = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
 
+    private lateinit var plannerAdapter: PlannerAdapter
+
     init {
-        setupViews()
         setUpCalendar()
+        setupViews()
+
     }
-
-
-    val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH)
-    val yearFormat: SimpleDateFormat = SimpleDateFormat("yyyy", Locale.ENGLISH)
-    var dates: MutableList<Date> = mutableListOf()
-    var eventsList: List<EventEntity> = mutableListOf()
 
     private fun setupViews() {
         with(binding) {
@@ -54,8 +60,11 @@ open class CustomCalendarView @JvmOverloads constructor
                 setUpCalendar()
             }
             gridView.setOnItemClickListener { _, _, position: Int, _ ->
-
+                createAlertDialog()
             }
+        }
+        with(binding.gridView) {
+            adapter = plannerAdapter
         }
     }
 
@@ -66,7 +75,7 @@ open class CustomCalendarView @JvmOverloads constructor
         dates = mutableListOf()
         var monthCalendar: Calendar = planner.clone() as Calendar
         monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
-        var firstDayOfMonth: Int = monthCalendar.get(Calendar.DAY_OF_WEEK) - 1
+        var firstDayOfMonth: Int = monthCalendar.get(Calendar.DAY_OF_WEEK) - 2
         monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
 
         while (dates.size < MAX_CALENDAT_DAYS) {
@@ -74,6 +83,11 @@ open class CustomCalendarView @JvmOverloads constructor
             monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
+        plannerAdapter = PlannerAdapter(
+            currentDate = planner,
+            eventsList = eventsList,
+            dates = dates
+        )
 
     }
 
@@ -86,6 +100,7 @@ open class CustomCalendarView @JvmOverloads constructor
     }
 
     private fun createAlertDialog() {
+        Log.d("PLANNER", "alert dialog open please")
         var builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
         var binding: EventDetailsFragmentBinding =
@@ -103,10 +118,15 @@ open class CustomCalendarView @JvmOverloads constructor
                     clndr.set(Calendar.HOUR_OF_DAY, hoursOfDay)
                     clndr.set(Calendar.MINUTE, minutesOfDay)
                     clndr.timeZone = TimeZone.getDefault()
-                    val formatDateTime: SimpleDateFormat = SimpleDateFormat("K:mm a", Locale.ENGLISH)
+                    val formatDateTime: SimpleDateFormat =
+                        SimpleDateFormat("K:mm a", Locale.ENGLISH)
                     binding.tvEventTime.text = formatDateTime.format(clndr.time)
-                }, hours, minutes, false)
+                }, hours, minutes, false
+            )
             timePickerDialog.show()
         }
+        alertDialog = builder.create()
+        alertDialog.show()
+
     }
 }
