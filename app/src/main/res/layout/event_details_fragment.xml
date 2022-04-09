@@ -6,29 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/llay_creating_event"
-    tools:context=".presentation.showEvent.EventDetailsFragment">
+    tools:context=".presentation.showEvent.EventDetailsFragment"
+    android:background="@color/E0EDFF">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name_event"
-        style="@style/TextInputOutlineStyle"
+        style="@style/RecTextInputStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="20dp"
         android:elevation="4dp"
         android:hint="Name for the new event"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/E425573"
         app:boxBackgroundColor="@color/white"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/E425573"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="1dp"
-        app:hintTextColor="@color/black">
+        app:hintTextColor="@color/E85A8DC">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tx_et_name_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,15 +39,15 @@
         android:orientation="horizontal">
         <ImageButton
             android:id="@+id/ibut_set_time"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/left_triangle_back_press"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_time"
             android:layout_margin="10dp"/>
         <TextView
             android:id="@+id/tv_event_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00: 00 AM"
+            android:text="00: 00"
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="20sp"
@@ -62,7 +63,9 @@
         android:text="Add Event"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:textColor="@color/black"
-        android:background="@drawable/blue_rectangle"/>
+        android:textColor="@color/E425573"
+        android:fontFamily="@font/bellota_text_light"
+        android:background="@drawable/blue_rectangle"
+        app:backgroundTint="@null"/>
 
 </LinearLayout>

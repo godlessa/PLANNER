@@ -31,12 +31,6 @@ class MainFragment : Fragment() {
 
         binding = MainFragmentBinding.inflate(inflater)
         setupViews()
-
-        //lifecycleScope.launchWhenStarted {
-        //    if(currentMonth != "" && currentYear != "")
-        //        events = viewModel.getEventsCurrentMonthFomDB(currentMonth, currentYear)
-        //}
-
         return binding.root
     }
 

@@ -8,14 +8,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TimePicker
-import com.example.planner.R
+import androidx.fragment.app.activityViewModels
 import com.example.planner.data.local.entities.EventEntity
 import com.example.planner.databinding.CalendarLayoutBinding
 import com.example.planner.databinding.EventDetailsFragmentBinding
 import com.example.planner.presentation.adapter.PlannerAdapter
+import com.example.planner.presentation.main.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 open class CustomCalendarView @JvmOverloads constructor
     (
@@ -104,8 +105,7 @@ open class CustomCalendarView @JvmOverloads constructor
         var builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
         var binding: EventDetailsFragmentBinding =
-            EventDetailsFragmentBinding.inflate(LayoutInflater.from(context), this, true)
-        //val addView: View = LayoutInflater.from(context).inflate(R.layout.event_details_fragment, null)
+            EventDetailsFragmentBinding.inflate(LayoutInflater.from(context), this, false)
         binding.ibutSetTime.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             var hours: Int = calendar.get(Calendar.HOUR_OF_DAY)
@@ -113,10 +113,10 @@ open class CustomCalendarView @JvmOverloads constructor
             var timePickerDialog: TimePickerDialog = TimePickerDialog(
                 binding.llayCreatingEvent.context,
                 androidx.appcompat.R.style.Theme_AppCompat_Dialog,
-                { timePicker: TimePicker, hoursOfDay: Int, minutesOfDay: Int ->
+                { view, hoursOfDay, minutesOfDay ->
                     val clndr: Calendar = Calendar.getInstance()
-                    clndr.set(Calendar.HOUR_OF_DAY, hoursOfDay)
-                    clndr.set(Calendar.MINUTE, minutesOfDay)
+                    clndr[Calendar.HOUR_OF_DAY] = hoursOfDay
+                    clndr[Calendar.MINUTE] = minutesOfDay
                     clndr.timeZone = TimeZone.getDefault()
                     val formatDateTime: SimpleDateFormat =
                         SimpleDateFormat("K:mm a", Locale.ENGLISH)
@@ -125,6 +125,10 @@ open class CustomCalendarView @JvmOverloads constructor
             )
             timePickerDialog.show()
         }
+        binding.mbutAddEvent.setOnClickListener{
+            alertDialog.dismiss()
+        }
+        builder.setView(binding.root)
         alertDialog = builder.create()
         alertDialog.show()
 
