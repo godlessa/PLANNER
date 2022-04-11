@@ -3,15 +3,20 @@ package com.example.planner.presentation.custom
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
+import com.example.planner.R
 import com.example.planner.data.local.entities.EventEntity
 import com.example.planner.databinding.CalendarLayoutBinding
 import com.example.planner.databinding.EventDetailsFragmentBinding
+import com.example.planner.databinding.TimePickerLayoutBinding
 import com.example.planner.presentation.adapter.PlannerAdapter
 import com.example.planner.presentation.main.MainViewModel
 import java.text.SimpleDateFormat
@@ -100,19 +105,22 @@ open class CustomCalendarView @JvmOverloads constructor
         return ""
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun createAlertDialog() {
         Log.d("PLANNER", "alert dialog open please")
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
+        //var bindingTP: TimePickerLayoutBinding = TimePickerLayoutBinding.inflate(LayoutInflater.from(context), this, false)
         var binding: EventDetailsFragmentBinding =
             EventDetailsFragmentBinding.inflate(LayoutInflater.from(context), this, false)
         binding.ibutSetTime.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             var hours: Int = calendar.get(Calendar.HOUR_OF_DAY)
             var minutes: Int = calendar.get(Calendar.MINUTE)
+
             var timePickerDialog: TimePickerDialog = TimePickerDialog(
                 binding.llayCreatingEvent.context,
-                androidx.appcompat.R.style.Theme_AppCompat_Dialog,
+                R.style.BlueTimePickerStyle,
                 { view, hoursOfDay, minutesOfDay ->
                     val clndr: Calendar = Calendar.getInstance()
                     clndr[Calendar.HOUR_OF_DAY] = hoursOfDay
@@ -130,6 +138,7 @@ open class CustomCalendarView @JvmOverloads constructor
         }
         builder.setView(binding.root)
         alertDialog = builder.create()
+        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
         alertDialog.show()
 
     }

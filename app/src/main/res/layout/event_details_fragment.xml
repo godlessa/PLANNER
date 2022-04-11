@@ -1,71 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llay_creating_event"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ic_flower_fon"
     android:orientation="vertical"
-    android:id="@+id/llay_creating_event"
-    tools:context=".presentation.showEvent.EventDetailsFragment"
-    android:background="@color/E0EDFF">
+    android:paddingHorizontal="40dp"
+    android:paddingVertical="17dp"
+    app:backgroundTint="@null"
+    tools:context=".presentation.showEvent.EventDetailsFragment">
+
+    <TextView
+        android:id="@+id/tv_tittle_creating_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="5dp"
+        android:fontFamily="@font/bellota_text_light"
+        android:gravity="center"
+        android:text="Creating an event"
+        android:textAllCaps="true"
+        android:textColor="@color/E425573"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name_event"
         style="@style/RecTextInputStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="20dp"
-        android:elevation="4dp"
+        android:layout_marginTop="5dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/bellota_text_light"
         android:hint="Name for the new event"
         android:textColorHint="@color/E425573"
         app:boxBackgroundColor="@color/white"
         app:boxStrokeColor="@color/E425573"
-        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidth="0.5dp"
         app:boxStrokeWidthFocused="1dp"
-        app:hintTextColor="@color/E85A8DC">
+        app:hintTextColor="@color/E85A8DC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tittle_creating_event">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tx_et_name_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bellota_text_light"
             android:inputType="textMultiLine"
+            android:maxLines="5"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/ibut_set_time"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_time"
+        app:layout_constraintTop_toBottomOf="@id/til_name_event"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_event_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/ibut_set_time"
-            android:layout_width="55dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_time"
-            android:layout_margin="10dp"/>
-        <TextView
-            android:id="@+id/tv_event_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="00: 00"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/bellota_text_light"
-            android:layout_margin="10dp"/>
-    </LinearLayout>
+        android:layout_marginVertical="15dp"
+        android:fontFamily="@font/bellota_text_light"
+        android:gravity="center"
+        android:text="00: 00"
+        android:textColor="@color/E425573"
+        android:layout_marginStart="20dp"
+        android:textSize="23sp"
+        app:layout_constraintStart_toEndOf="@id/ibut_set_time"
+        app:layout_constraintTop_toTopOf="@id/ibut_set_time"
+        app:layout_constraintBottom_toBottomOf="@id/ibut_set_time"/>
+
+    <TextView
+        android:id="@+id/tv_seton_alarm_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/bellota_text_light"
+        android:text="Set on a notificaton for the event"
+        android:textColor="@color/E425573"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/ibut_set_time"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_seton_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/SwitchCustomBlue"
+        app:layout_constraintTop_toTopOf="@id/tv_seton_alarm_tittle"
+        app:layout_constraintBottom_toBottomOf="@id/tv_seton_alarm_tittle"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbut_add_event"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Add Event"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:textColor="@color/E425573"
-        android:fontFamily="@font/bellota_text_light"
+        android:layout_marginVertical="10dp"
+        android:textSize="14sp"
         android:background="@drawable/blue_rectangle"
-        app:backgroundTint="@null"/>
+        android:fontFamily="@font/bellota_text_light"
+        android:text="Add Event"
+        android:textColor="@color/E425573"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sw_seton_alarm"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

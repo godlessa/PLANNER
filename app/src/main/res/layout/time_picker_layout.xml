@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/time_picker_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TimePicker
+        android:id="@+id/tm_time_piker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_fon_time_picker"
+        android:headerBackground="@color/transparent"
+        android:numbersBackgroundColor="@color/E85A8DC"
+        android:numbersSelectorColor="@color/E425573"
+        android:numbersTextColor="@color/E0EDFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbut_ok_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/blue_rectangle"
+        android:fontFamily="@font/bellota_text_light"
+        android:text="OK"
+        android:textColor="@color/E425573"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@id/tm_time_piker"
+        app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbut_cancel_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/blue_rectangle"
+        android:fontFamily="@font/bellota_text_light"
+        android:text="Cancel"
+        android:textColor="@color/E425573"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@id/tm_time_piker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_center_vertical" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

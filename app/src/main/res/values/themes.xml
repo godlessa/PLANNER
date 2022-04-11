@@ -24,4 +24,17 @@
         <item name="boxCornerRadiusTopStart">15dp</item>
         <item name="boxCornerRadiusTopEnd">15dp</item>
     </style>
+    <style name="BlueTimePickerStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:headerBackground">@color/transparent</item>
+        <item name="android:background">@drawable/ic_fon_time_picker</item>
+        <item name="android:numbersSelectorColor">@color/E425573</item>
+        <item name="android:numbersBackgroundColor">@color/E85A8DC</item>
+        <item name="android:numbersTextColor">@color/E0EDFF</item>
+    </style>
+    <style name="SwitchCustomBlue">
+        <item name="colorControlActivated">@color/E425573</item>
+        <item name="thumbTint">@color/white</item>
+        <item name="trackTint">@color/E85A8DC</item>
+        <item name="trackHeight">20dp</item>
+    </style>
 </resources>
