@@ -82,7 +82,7 @@ class PlannerAdapter(
     }
 
     private fun convertStringToDate(dateInString: String): Date? {
-        val format: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         var date: Date? = null
         try {
             date = format.parse(dateInString)

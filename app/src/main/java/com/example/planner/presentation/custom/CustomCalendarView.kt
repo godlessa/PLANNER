@@ -3,6 +3,8 @@ package com.example.planner.presentation.custom
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Color.*
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
@@ -11,7 +13,10 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
+import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
+import com.example.planner.App
+import com.example.planner.App.Companion.applicationContext
 import com.example.planner.R
 import com.example.planner.data.local.entities.EventEntity
 import com.example.planner.databinding.CalendarLayoutBinding
@@ -42,6 +47,7 @@ open class CustomCalendarView @JvmOverloads constructor
     var eventsList: List<EventEntity> = mutableListOf()
 
     lateinit var alertDialog: AlertDialog
+    lateinit var alertDialogTP: AlertDialog
 
     private var binding: CalendarLayoutBinding =
         CalendarLayoutBinding.inflate(LayoutInflater.from(context), this, true)
@@ -56,6 +62,8 @@ open class CustomCalendarView @JvmOverloads constructor
 
     }
 
+    private var positionCurrent = 0
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun setupViews() {
         with(binding) {
@@ -68,6 +76,7 @@ open class CustomCalendarView @JvmOverloads constructor
                 setUpCalendar()
             }
             gridView.setOnItemClickListener { _, _, position: Int, _ ->
+                positionCurrent = position
                 createAlertDialogAddEvent()
             }
         }
@@ -113,33 +122,17 @@ open class CustomCalendarView @JvmOverloads constructor
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
         //var bindingTP: TimePickerLayoutBinding = TimePickerLayoutBinding.inflate(LayoutInflater.from(context), this, false)
-        var binding: EventDetailsFragmentBinding =
+        var bindingE: EventDetailsFragmentBinding =
             EventDetailsFragmentBinding.inflate(LayoutInflater.from(context), this, false)
-        binding.ibutSetTime.setOnClickListener {
-            /*val calendar: Calendar = Calendar.getInstance()
-            var hours: Int = calendar.get(Calendar.HOUR_OF_DAY)
-            var minutes: Int = calendar.get(Calendar.MINUTE)
-
-            var timePickerDialog: TimePickerDialog = TimePickerDialog(
-                binding.llayCreatingEvent.context,
-                R.style.BlueTimePickerStyle,
-                { view, hoursOfDay, minutesOfDay ->
-                    val clndr: Calendar = Calendar.getInstance()
-                    clndr[Calendar.HOUR_OF_DAY] = hoursOfDay
-                    clndr[Calendar.MINUTE] = minutesOfDay
-                    clndr.timeZone = TimeZone.getDefault()
-                    val formatDateTime: SimpleDateFormat =
-                        SimpleDateFormat("K:mm a", Locale.ENGLISH)
-                    binding.tvEventTime.text = formatDateTime.format(clndr.time)
-                }, hours, minutes, false
-            )
-            timePickerDialog.show()*/
-            createAlertDialogAddTime(binding)
+        bindingE.ibutSetTime.setOnClickListener {
+            createAlertDialogAddTime(bindingE)
         }
-        binding.mbutAddEvent.setOnClickListener {
+        bindingE.mbutAddEvent.setOnClickListener {
             alertDialog.dismiss()
+            binding.gridView.get(positionCurrent).background = App.applicationContext().getDrawable(android.R.color.holo_purple)
+            return@setOnClickListener
         }
-        builder.setView(binding.root)
+        builder.setView(bindingE.root)
         alertDialog = builder.create()
         alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
         alertDialog.show()
@@ -150,15 +143,14 @@ open class CustomCalendarView @JvmOverloads constructor
         Log.d("PLANNER", "alert dialog AddTime open please")
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
-        //var bindingTP: TimePickerLayoutBinding = TimePickerLayoutBinding.inflate(LayoutInflater.from(context), this, false)
-        var binding: TimePickerLayoutBinding =
+        var bindingTP: TimePickerLayoutBinding =
             TimePickerLayoutBinding.inflate(LayoutInflater.from(context), this, false)
 
         val calendar: Calendar = Calendar.getInstance()
         var hours: Int = calendar.get(Calendar.HOUR_OF_DAY)
         var minutes: Int = calendar.get(Calendar.MINUTE)
 
-        binding.tmTimePiker.setOnTimeChangedListener { timePicker, hoursOfDay, minutesOfDay ->
+        bindingTP.tmTimePiker.setOnTimeChangedListener { timePicker, hoursOfDay, minutesOfDay ->
             val clndr: Calendar = Calendar.getInstance()
             clndr[Calendar.HOUR_OF_DAY] = hoursOfDay
             clndr[Calendar.MINUTE] = minutesOfDay
@@ -168,17 +160,17 @@ open class CustomCalendarView @JvmOverloads constructor
             bindingED.tvEventTime.text = formatDateTime.format(clndr.time)
         }
 
-        binding.mbutOkEvent.setOnClickListener {
-            alertDialog.dismiss()
+        bindingTP.mbutOkEvent.setOnClickListener {
+            alertDialogTP.dismiss()
         }
-        binding.mbutCancelEvent.setOnClickListener{
-            alertDialog.dismiss()
+        bindingTP.mbutCancelEvent.setOnClickListener {
+            alertDialogTP.dismiss()
         }
 
-        builder.setView(binding.root)
-        alertDialog = builder.create()
-        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
-        alertDialog.show()
+        builder.setView(bindingTP.root)
+        alertDialogTP = builder.create()
+        alertDialogTP.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+        alertDialogTP.show()
 
     }
 }

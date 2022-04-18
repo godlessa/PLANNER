@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.planner.data.local.entities.EventEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EventsDao {

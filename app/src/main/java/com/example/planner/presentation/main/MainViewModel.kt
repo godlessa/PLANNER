@@ -22,7 +22,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel(
 ) {
 
-
     /*private fun getEventsFomDB(){
         viewModelScope.launch {
             try {

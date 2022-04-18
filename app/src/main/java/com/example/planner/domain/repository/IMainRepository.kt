@@ -1,6 +1,7 @@
 package com.example.planner.domain.repository
 
 import com.example.planner.data.local.entities.EventEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton
 
 interface IMainRepository {
