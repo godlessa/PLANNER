@@ -74,11 +74,10 @@ class PlannerAdapter(
             }
 
         }
-        binding.tvCountEventsDay.text = countEventsForIsDay.toString() + "ev"
-        if (countEventsForIsDay == 0)
-            binding.tvCountEventsDay.setTextColor(R.color.black)
+        if(countEventsForIsDay != 0)
+            binding.tvCountEventsDay.text = countEventsForIsDay.toString() + "ev"
         else
-            binding.tvCountEventsDay.setTextColor(R.color.E85A8DC)
+            binding.tvCountEventsDay.text = " "
         return view
     }
 
