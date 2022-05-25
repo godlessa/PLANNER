@@ -1,34 +1,30 @@
 package com.example.planner.presentation.custom
 
 import android.app.AlertDialog
-import android.app.TimePickerDialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Color.*
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.core.view.get
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.lifecycle.get
 import com.example.planner.App
-import com.example.planner.App.Companion.applicationContext
-import com.example.planner.R
 import com.example.planner.data.local.entities.EventEntity
 import com.example.planner.databinding.CalendarLayoutBinding
 import com.example.planner.databinding.EventDetailsFragmentBinding
 import com.example.planner.databinding.TimePickerLayoutBinding
 import com.example.planner.presentation.adapter.PlannerAdapter
 import com.example.planner.presentation.main.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 @RequiresApi(Build.VERSION_CODES.Q)
+@AndroidEntryPoint
 open class CustomCalendarView @JvmOverloads constructor
     (
     context: Context,
@@ -39,6 +35,10 @@ open class CustomCalendarView @JvmOverloads constructor
 
     companion object {
         const val MAX_CALENDAT_DAYS = 42
+    }
+
+    private val viewModel by lazy {
+        ViewModelProvider(findViewTreeViewModelStoreOwner()!!).get<MainViewModel>()
     }
 
     val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH)
@@ -91,7 +91,7 @@ open class CustomCalendarView @JvmOverloads constructor
 
         dates = mutableListOf()
         var monthCalendar: Calendar = planner.clone() as Calendar
-        monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
+        monthCalendar.set(Calendar.DAY_OF_MONTH, 0)
         var firstDayOfMonth: Int = monthCalendar.get(Calendar.DAY_OF_WEEK) - 2
         monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
 
@@ -105,6 +105,7 @@ open class CustomCalendarView @JvmOverloads constructor
             eventsList = eventsList,
             dates = dates
         )
+        binding.gridView.adapter = plannerAdapter
 
     }
 
@@ -121,7 +122,6 @@ open class CustomCalendarView @JvmOverloads constructor
         Log.d("PLANNER", "alert dialog AddEvent open please")
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
-        //var bindingTP: TimePickerLayoutBinding = TimePickerLayoutBinding.inflate(LayoutInflater.from(context), this, false)
         var bindingE: EventDetailsFragmentBinding =
             EventDetailsFragmentBinding.inflate(LayoutInflater.from(context), this, false)
         bindingE.ibutSetTime.setOnClickListener {
@@ -129,8 +129,19 @@ open class CustomCalendarView @JvmOverloads constructor
         }
         bindingE.mbutAddEvent.setOnClickListener {
             alertDialog.dismiss()
-            binding.gridView.get(positionCurrent).background = App.applicationContext().getDrawable(android.R.color.holo_purple)
-            return@setOnClickListener
+            binding.gridView.get(positionCurrent).background =
+                App.applicationContext().getDrawable(android.R.color.holo_purple)
+            viewModel.addEventInDB(
+                EventEntity(
+                    id = 0,
+                    event = "Hellow world",
+                    time = "0",
+                    date = "25",
+                    month = "MAY",
+                    year = "2022",
+                    status = "created"
+                ))
+                return@setOnClickListener
         }
         builder.setView(bindingE.root)
         alertDialog = builder.create()
