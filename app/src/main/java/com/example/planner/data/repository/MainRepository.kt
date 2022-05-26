@@ -22,11 +22,12 @@ class MainRepository @Inject constructor(
     override suspend fun getEvents(): List<EventEntity> =
         appDatabase.eventsDao().getAllEvents()
 
-    override suspend fun getEventToMonth(month: String, year: String): List<EventEntity> =
+    override suspend fun getEventToMonthYear(month: String, year: String): Flow<List<EventEntity>> =
         appDatabase.eventsDao().getEventsToMonth(
             selectedMonth = month,
             selectedYear = year
         )
+
 
     override suspend fun insertEventsList(eventsList: List<EventEntity>) =
         appDatabase.eventsDao().insertEventList(eventsList)

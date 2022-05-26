@@ -41,8 +41,6 @@ open class CustomCalendarView @JvmOverloads constructor
         ViewModelProvider(findViewTreeViewModelStoreOwner()!!).get<MainViewModel>()
     }
 
-    val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH)
-    val yearFormat: SimpleDateFormat = SimpleDateFormat("yyyy", Locale.ENGLISH)
     var dates: MutableList<Date> = mutableListOf()
     var eventsList: List<EventEntity> = mutableListOf()
 
@@ -77,6 +75,7 @@ open class CustomCalendarView @JvmOverloads constructor
             }
             gridView.setOnItemClickListener { _, _, position: Int, _ ->
                 positionCurrent = position
+                Log.d("DATABASE PLANNER ", positionCurrent.toString())
                 createAlertDialogAddEvent()
             }
         }
@@ -119,7 +118,6 @@ open class CustomCalendarView @JvmOverloads constructor
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun createAlertDialogAddEvent() {
-        Log.d("PLANNER", "alert dialog AddEvent open please")
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setCancelable(true)
         var bindingE: EventDetailsFragmentBinding =
@@ -127,6 +125,10 @@ open class CustomCalendarView @JvmOverloads constructor
         bindingE.ibutSetTime.setOnClickListener {
             createAlertDialogAddTime(bindingE)
         }
+
+        var dateFormatMonth = SimpleDateFormat("MMMM", Locale.ENGLISH)
+        var dateFormatYear = SimpleDateFormat("yyyy", Locale.ENGLISH)
+
         bindingE.mbutAddEvent.setOnClickListener {
             alertDialog.dismiss()
             binding.gridView.get(positionCurrent).background =
@@ -135,10 +137,10 @@ open class CustomCalendarView @JvmOverloads constructor
                 EventEntity(
                     id = 0,
                     event = "Hellow world",
-                    time = "0",
+                    time = 0,
                     date = "25",
-                    month = "MAY",
-                    year = "2022",
+                    month = dateFormatMonth.format(planner.time),
+                    year =  dateFormatYear.format(planner.time),
                     status = "created"
                 ))
                 return@setOnClickListener

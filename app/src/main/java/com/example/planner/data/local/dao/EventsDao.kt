@@ -21,7 +21,7 @@ interface EventsDao {
             SELECT * FROM events WHERE month = :selectedMonth AND year =:selectedYear
             """
     )
-    suspend fun getEventsToMonth(selectedMonth: String, selectedYear: String): List<EventEntity>
+    fun getEventsToMonth(selectedMonth: String, selectedYear: String): Flow<List<EventEntity>>
 
     @Insert
     suspend fun insertEventList(eventsList: List<EventEntity>)

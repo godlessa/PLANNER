@@ -8,7 +8,7 @@ interface IMainRepository {
 
     suspend fun getEvents(): List<EventEntity>
 
-    suspend fun getEventToMonth(month: String, year: String): List<EventEntity>
+    suspend fun getEventToMonthYear(month: String, year: String): Flow<List<EventEntity>>
 
     suspend fun insertEventsList(eventsList: List<EventEntity>)
 
