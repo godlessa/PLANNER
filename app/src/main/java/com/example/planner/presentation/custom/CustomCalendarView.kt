@@ -75,7 +75,7 @@ open class CustomCalendarView @JvmOverloads constructor
             }
             gridView.setOnItemClickListener { _, _, position: Int, _ ->
                 positionCurrent = position
-                Log.d("DATABASE PLANNER ", positionCurrent.toString())
+                Log.d("DATABASE PLANNER ", (dates[positionCurrent].day+1).toString())
                 createAlertDialogAddEvent()
             }
         }
@@ -136,9 +136,9 @@ open class CustomCalendarView @JvmOverloads constructor
             viewModel.addEventInDB(
                 EventEntity(
                     id = 0,
-                    event = "Hellow world",
+                    event = "Hello world",
                     time = 0,
-                    date = "25",
+                    date = (dates[positionCurrent].day+1).toString(),
                     month = dateFormatMonth.format(planner.time),
                     year =  dateFormatYear.format(planner.time),
                     status = "created"
